@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "s3_css"
+		},
+		{
+			"path": "s4_css"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "s4_css"
+	}
+}
