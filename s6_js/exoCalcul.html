@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Apprendre A calculer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="exo.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <div class="container">
+<div class="row">
+<div class="col-md-4 bg-light pt-3">
+ <form action="">
+<div class="form-group">
+    <label for="">Nombre 1 :</label>
+    <input type="text"  onchange=" boutonAm()" class="form-control" id="n1" autocomplete="off">
+</div>
+<div class="form-group">
+    <label for="">Nombre 2 :</label>
+    <input onchange=" boutonAm()" type="text" class="form-control" id="n2" autocomplete="off">
+</div>
+<div class="form-group">
+  
+    <input onclick="calculer()" type="button"  value="Calculer" class="btn btn-primary col-12 cacher">
+</div>
+
+
+ </form>
+
+
+</div>
+<div class="col-md-4 bg-dark">
+<input type="text" onchange=" boutonAm()" name="rep" id="rep" placeholder="Entrer la reponse" class="form-control m-4 col-10">
+
+</div>
+<div class="col-md-4 text-center">
+    <img src="images/ok.gif" alt="" class="img-fluid cacher" width="200px" id="">
+</div>
+
+</div>
+<input type="button" value="Nouveau" class="btn btn-danger" onclick="aleatoire()">
+   </div>
+
+    
+
+</body>
+</html>
