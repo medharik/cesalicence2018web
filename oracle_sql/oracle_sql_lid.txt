@@ -1,0 +1,70 @@
+
+select first_name ||' '|| last_name as "nom complet" from employees
+
+select * from employees
+where employee_id=100
+-- recherche par sans la casse
+select * from employees
+where lower(first_name) ='david'
+
+select * from employees
+where upper(first_name) ='DAVID'
+
+--ceux qui ont la commission
+select first_name , salary as "salaire", commission_pct, salary + salary* commission_pct as "salaire BRUTE" from  employees
+where salary >= 1000
+and commission_pct is not null
+
+-- NVL(commission_pct,0) remplave les commission null par 0
+select first_name , salary as "salaire",
+commission_pct,salary + salary* NVL(commission_pct,0) as "salaire BRUTE" from  employees
+where salary >= 1000
+-- les employees qui ont first_name contenant la sous chaine daa 
+select * from employees
+where first_name like '%da%'
+
+-- nom ou prenom qui se terminent par d
+select * from employees
+where first_name like '%d' or last_name like '%d'
+
+select first_name||' '||last_name as "Nom complet" , salary
+from employees 
+where salary > 1000 and commission_pct is null and first_name like '%e%' and last_name like '%n'
+and phone_number like '01%'
+
+
+--les fonctions de groupe :
+-- les fonctions de groupe (agregation)
+select   count(*) as "nombre d'employe",  sum(salary) as "Masse salariale", max(salary),
+min(salary), avg(salary) from employees
+order by first_name asc
+
+--la masse salariale par metier
+select job_id,  sum(salary) from employees
+group by job_id
+
+-- salaire max et min par departement (not null)
+select department_id, max(salary), min(salary) from employees
+where department_id is not null
+GROUP by department_id
+
+-- salaire max et min par departement (not null)
+select department_id, max(salary), min(salary), count(*)  from employees
+where department_id is not null 
+GROUP by department_id
+having count(*) > 30
+
+-- les nom / prenom des employees et le nom de leurs depart
+select e.first_name , e.last_name , d.department_name 
+from employees e , departments d
+
+where d.department_id=e.department_id
+
+-- le nombre d'employes pour charque departemennt , on limite la recherche pour les departements ayant
+--une masse salariale > 10000
+select d.department_name , count(*) as "nombre d'employé"
+from employees e , departments d 
+where e.department_id=d.department_id
+group by  d.department_name
+having sum(salary) > 10000
+
