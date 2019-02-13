@@ -68,3 +68,64 @@ where e.department_id=d.department_id
 group by  d.department_name
 having sum(salary) > 10000
 
+
+
+--
+select department_name , count(*) as "nombre d'employes",
+max(e.salary) , min(salary) , sum(e.salary), sum(e.salary)/count(*),avg(salary)
+from departments d , employees e
+where d.department_id=e.department_id 
+group by d.department_name
+having avg(e.salary) between 10000 and 30000
+
+--
+select e.first_name ||' '||e.last_name as "Nom Complet", j.job_title as Metier,l.city, c.country_name , 
+r.region_name 
+from 
+employees e ,departments d, locations l, countries c , regions r , jobs j
+where 
+e.department_id=d.department_id and 
+d.location_id= l.location_id and 
+l.country_id=c.country_id and 
+c.region_id = r.region_id and 
+j.job_id=e.job_id and 
+r.region_name ='Europe'
+
+select 
+r.region_name , count(*)  
+from 
+employees e ,departments d, locations l, countries c , regions r , jobs j
+where 
+e.department_id=d.department_id and 
+d.location_id= l.location_id and 
+l.country_id=c.country_id and 
+c.region_id = r.region_id and 
+j.job_id=e.job_id  
+group by r.region_name
+
+select * from employees
+where salary in (select salary from employees where lower(first_name)='david' )
+and first_name not like  'David'
+
+select * from employees where
+salary=(select max(salary) from employees where job_id='IT_PROG')
+and 
+
+job_id='IT_PROG'
+
+
+--select e.first_name, e.last_name , e.salary , d.department_name
+--from  departments d , employees e 
+--where 
+--e.department_id=d.department_id 
+--and salary > (select max(salary) from employees where job_id='IT_PROG')
+-- liste des employees ayant un salaire entre le meilleure salaire des It_PROG et et le salaire Min des SA_REP
+--et qui travaillent à seattle 
+
+select * from employees where 
+salary between(select min(salary) from employees where job_id='SA_REP')
+and
+ (select max(salary) from employees where job_id='IT_PROG')
+ 
+
+-- les employés de l'europe qui sont mieux payés que de l'amerique 
