@@ -129,3 +129,38 @@ and
  
 
 -- les employés de l'europe qui sont mieux payés que de l'amerique 
+
+
+
+-- liste des subordonnés de Neena kochhar (le manager)  (auto-jointure)
+select sub.first_name, sub.last_name , sup.first_name , sup.last_name
+from employees sub , employees sup
+
+where sub.manager_id=sup.employee_id
+and lower(sup.first_name)='neena' and lower(sup.last_name)='kochhar'
+
+-- nombre de subordone par manager
+select sup.first_name , sup.last_name, count(*)
+from employees sub , employees sup
+
+where sub.manager_id=sup.employee_id
+
+group by sup.first_name , sup.last_name
+--and lower(sup.first_name)='neena' and lower(sup.last_name)='kochhar'
+
+
+-- nombre de subordone par manager
+--select sup.first_name , sup.last_name, count(*)
+--from employees sub , employees sup
+--where sub.manager_id=sup.employee_id
+--group by sup.first_name , sup.last_name
+--and lower(sup.first_name)='neena' and lower(sup.last_name)='kochhar'
+--select sysdate from dual
+--select 1+2 from dual
+--select SYSTIMESTAMP from dual
+--select to_char(sysdate,'dd-mm-yyyy HH24:i:ss') from dual
+--select (sysdate - hire_date)/365.25 from employees
+select first_name,last_name , hire_date , 
+to_char(hire_date,'day','NLS_DATE_LANGUAGE=french'),
+ceil((sysdate - hire_date)/365.25) from employees where 
+to_char(hire_date, 'd') in (1,2,3)
