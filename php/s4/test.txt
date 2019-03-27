@@ -1,0 +1,25 @@
+baleno #18
+casa : 26
+
+==> bon de charge vendeur de 10
+=> casa : 16
+
+==> retour vendeur de 5 baleno #18 a casa 
+=>casa 21
+
+principal : -40
+
+casa : 21
+retour  de casa vers principal  de 1 baleno
+==> casa 20
+==> principal -39
+-------------------------------------------
+solere 
+ casa : 45
+ principal : -4
+
+ transfert achat  de casa vers principal de 10
+ casa 35
+ principal 6
+
+
