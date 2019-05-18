@@ -1,0 +1,62 @@
+create or replace trigger salaire_min
+
+after update on employees
+for each row
+declare 
+vdif number;
+begin
+vdif := :new.salary - :old.salary;
+if  vdif > 0 then
+dbms_output.put_line('augmentation de salaire de '||vdif||' $  pour '||:new.first_name);
+
+else
+dbms_output.put_line('reduction de  salaire de '||vdif||' $  pour '||:new.first_name);
+
+end if;
+
+end;
+
+
+create table etudiant(
+id number(3) primary key,
+nom varchar2(255) not null,
+classe_id number not null,
+constraint fk_classe_id foreign key (classe_id) references classes(id) on delete cascade
+)
+
+
+insert into classes(id,nom,nb_etudiant) values(2,'licence1',0)
+
+create or replace trigger incr_nb_etudiant
+after insert on etudiant
+for each row
+
+begin
+
+update classes set nb_etudiant = nb_etudiant+1
+where id= :new.classe_id;
+
+
+end;
+
+insert into etudiant(id,nom,classe_id) values(1,'dassoah',1)
+
+
+create or replace trigger interdire_max_etudiant
+
+before insert on etudiant
+
+for each row
+
+declare 
+vn_etudiant number ;
+begin
+
+select count(*) into vn_etudiant  from etudiant where classe_id= :new.classe_id;
+if vn_etudiant > 5 then
+dbms_output.put_line('plus de 5 ');
+raise_application_error(-20009, 'nombre d etudiant limite pour cette classe ');
+
+end if ;
+
+end;
